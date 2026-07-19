@@ -1,0 +1,8 @@
+name: fixture-upstream-skill
+version: 0.0.0-development
+description: Local-only upstream skill used to verify APM composition.
+license: MIT
+dependencies:
+  apm: []
+  mcp: []
+includes: auto

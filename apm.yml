@@ -1,0 +1,21 @@
+name: draigara-openapm
+version: 0.1.0
+description: Draigara OpenAPM Community marketplace for curated engineering agent packages.
+license: MIT
+repository: https://github.com/draigara/draigara-openapm
+marketplace:
+  owner:
+    name: Draigara
+    url: https://github.com/draigara
+  build:
+    tagPattern: "v{version}"
+  outputs:
+    claude: {}
+    codex: {}
+  sourceBase: https://github.com/draigara
+  packages:
+    - name: draigara-forge
+      description: Repository-aware discovery and selection of APM marketplace packages through Draigara Forge.
+      source: draigara-forge-plugin
+      version: "0.1.0"
+      category: Productivity

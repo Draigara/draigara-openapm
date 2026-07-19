@@ -1,0 +1,25 @@
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+secrets/
+*.pfx
+*.p12
+*.key
+*.pem
+
+# Local APM and Forge state
+.apm/cache/
+.forge/
+
+# Scratch and release archives
+build/
+release/
+*.zip
+*.tar.gz

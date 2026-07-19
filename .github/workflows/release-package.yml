@@ -1,0 +1,45 @@
+name: Release Marketplace
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: marketplace-release
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+      - shell: pwsh
+        run: ./tools/Validate-Repository.ps1
+      - run: uvx --from apm-cli==0.26.0 apm marketplace check
+      - run: uvx --from apm-cli==0.26.0 apm pack --marketplace=claude,codex --json
+      - run: git diff --exit-code -- .claude-plugin/marketplace.json .agents/plugins/marketplace.json
+      - name: Package generated marketplaces
+        run: |
+          mkdir -p artifacts
+          cp .claude-plugin/marketplace.json artifacts/marketplace.json
+          cp .agents/plugins/marketplace.json artifacts/codex-marketplace.json
+          sha256sum artifacts/* > artifacts/SHA256SUMS
+      - uses: actions/upload-artifact@v7
+        with:
+          name: draigara-openapm
+          path: artifacts/
+      - uses: softprops/action-gh-release@v3
+        if: ${{ github.event_name == 'push' || !inputs.dry_run }}
+        with:
+          files: artifacts/*
+          generate_release_notes: true

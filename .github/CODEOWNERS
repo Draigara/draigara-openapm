@@ -1,0 +1,4 @@
+* @draigara/maintainers
+/docs/package-charters/ @draigara/marketplace-curators
+/packages/ @draigara/marketplace-curators @draigara/security
+/.github/workflows/ @draigara/release-engineering

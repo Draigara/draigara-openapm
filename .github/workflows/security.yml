@@ -1,0 +1,36 @@
+name: Supply Chain
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 4 * * 1'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+
+  package-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Reject floating upstream references
+        shell: bash
+        run: |
+          if test -d packages; then
+            ! grep -R -E '(@|ref:|version:)[[:space:]]*(latest|main|master|HEAD)' packages
+          fi
+      - name: Locate executable assets for review
+        shell: bash
+        run: |
+          find packages -type f \( -name '*.sh' -o -name '*.ps1' -o -name '*.py' -o -name '*.js' \) -print 2>/dev/null || true

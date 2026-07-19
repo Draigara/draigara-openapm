@@ -1,0 +1,38 @@
+name: Validate Marketplace
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: draigara-openapm
+      - uses: actions/checkout@v7
+        with:
+          repository: draigara/draigara-forge-plugin
+          path: draigara-forge-plugin
+      - uses: astral-sh/setup-uv@v7
+      - name: Validate active documentation and release sources
+        shell: pwsh
+        working-directory: draigara-openapm
+        run: ./tools/Validate-Repository.ps1
+      - name: Build and validate local marketplace
+        shell: pwsh
+        working-directory: draigara-openapm
+        run: |
+          $marketplace = ./tools/New-LocalMarketplace.ps1
+          Push-Location $marketplace
+          try {
+            uvx --from apm-cli==0.26.0 apm marketplace check --offline
+            uvx --from apm-cli==0.26.0 apm pack --marketplace=claude,codex --json
+          } finally {
+            Pop-Location
+          }

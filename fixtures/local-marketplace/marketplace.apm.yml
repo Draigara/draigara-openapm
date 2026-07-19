@@ -1,0 +1,20 @@
+name: draigara-openapm-local
+version: 0.0.0-development
+description: Generated local-only marketplace for cross-repository Forge acceptance tests.
+marketplace:
+  owner:
+    name: Draigara
+  outputs:
+    claude: {}
+    codex: {}
+  packages:
+    - name: draigara-forge
+      description: Local sibling Forge plugin under development.
+      source: ./packages/draigara-forge
+      version: 0.1.0
+      category: Productivity
+    - name: fixture-composition-smoke
+      description: Local-only direct and transitive composition fixture.
+      source: ./packages/composition-smoke
+      version: 0.0.0-development
+      category: Testing

@@ -1,0 +1,9 @@
+name: fixture-composition-smoke
+version: 0.0.0-development
+description: Local-only package used to verify transitive APM composition.
+license: MIT
+dependencies:
+  apm:
+    - ../upstream-skill
+  mcp: []
+includes: auto
