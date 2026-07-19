@@ -1,69 +1,45 @@
 # Draigara OpenAPM Community
 
-Draigara OpenAPM Community is a public, curated Microsoft APM marketplace. Its
-stable marketplace ID is:
-
-```text
-draigara-openapm
-```
-
-APM owns package discovery, dependency resolution, validation, and deployment.
-This repository publishes marketplace metadata and policy; it does not
-implement a second package manager or resolver.
-
-## Available packages
-
-The initial package is Draigara Forge:
-
-```text
-draigara-forge@draigara-openapm
-└─ package       └─ marketplace
-```
-
-Forge provides guided repository evaluation and package selection. Additional
-package charters in this repository describe candidates, not packages currently
-available to install.
+Draigara OpenAPM Community is a public, curated Microsoft APM marketplace. Its stable marketplace ID is `draigara-openapm`; its display name is “Draigara OpenAPM Community.” APM owns package resolution, lock state, validation, and deployment.
 
 ## Get started
 
-The recommended path registers the marketplace and installs Forge through one
-guided setup:
+The recommended path installs Forge as a global plugin bundle and registers this marketplace:
 
 ```sh
 npx @draigara/forge setup
 ```
 
-Forge displays the complete plan before asking APM to change marketplace or
-plugin state.
+The generated public marketplace source is:
 
-## Contributing packages
+```text
+https://raw.githubusercontent.com/Draigara/draigara-openapm/main/.claude-plugin/marketplace.json
+```
 
-Community packages must follow the curation, licensing, provenance, security,
-and testing requirements in [docs/package-authoring.md](./docs/package-authoring.md)
-and [docs/curation-policy.md](./docs/curation-policy.md). Start with an issue or
-proposal before adding a production marketplace entry.
+## Preview catalogue
 
-To create a private local marketplace containing a sibling
-`draigara-forge-plugin` checkout and the harmless composition fixtures, run:
+- `draigara-forge`: global Forge bootstrap plugin; not a repository recommendation.
+- `superpowers`: intact upstream plugin for Claude and Codex.
+- `frontend-design`: Anthropic's standalone repository skill.
+- `security-review`: GitHub's standalone repository security-review skill.
+- `caveman`: the upstream core output-reduction skill, with its token-cost tradeoff documented.
+
+Every entry is pinned and has a provenance record under [`docs/provenance`](./docs/provenance). Draigara does not decompose whole plugins, copy upstream collections wholesale, or add hidden Forge ranking instructions.
+
+## Contributing
+
+Use APM 0.26.x:
+
+```sh
+pwsh ./tools/Test-UpstreamPins.ps1
+uvx --from apm-cli==0.26.0 apm pack --marketplace claude,codex
+pwsh ./tools/Validate-Repository.ps1
+```
+
+The local generator creates a disposable marketplace from intentional tracked inputs only:
 
 ```powershell
 $marketplace = ./tools/New-LocalMarketplace.ps1
-Push-Location $marketplace
-uvx --from apm-cli apm marketplace check --offline
-uvx --from apm-cli apm pack --marketplace claude,codex
-Pop-Location
 ```
 
-The generator accepts an optional output directory. Local paths and fixture
-packages are prohibited from production marketplace output.
-
-Marketplace maintainers validate production metadata with:
-
-```sh
-uvx --from apm-cli apm marketplace check
-uvx --from apm-cli apm pack --marketplace claude,codex
-```
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) and
-[docs/architecture.md](./docs/architecture.md) for repository guidance. Coding
-agents must start with [AGENTS.md](./AGENTS.md) and the Accepted ADRs.
+Start with [AGENTS.md](./AGENTS.md), the [curation policy](./docs/curation-policy.md), and the [Accepted ADRs](./docs/adr/README.md).

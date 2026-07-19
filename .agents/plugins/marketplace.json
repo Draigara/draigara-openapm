@@ -1,0 +1,81 @@
+{
+  "name": "draigara-openapm",
+  "interface": {
+    "displayName": "draigara-openapm"
+  },
+  "plugins": [
+    {
+      "name": "draigara-forge",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/draigara/draigara-forge-plugin",
+        "ref": "v0.1.0-preview.0",
+        "sha": "81a2b85d961af5a5e02dbbcc6d9f20540b7697ef"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "superpowers",
+      "source": {
+        "source": "url",
+        "url": "obra/superpowers",
+        "ref": "v6.1.1",
+        "sha": "c984ea2e7aeffdcc865784fd6c5e3ab75da0209a"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "frontend-design",
+      "source": {
+        "source": "git-subdir",
+        "url": "anthropics/skills",
+        "path": "skills/frontend-design",
+        "ref": "fa0fa64bdc967915dc8399e803be67759e1e62b8",
+        "sha": "fa0fa64bdc967915dc8399e803be67759e1e62b8"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Design"
+    },
+    {
+      "name": "security-review",
+      "source": {
+        "source": "git-subdir",
+        "url": "github/awesome-copilot",
+        "path": "skills/security-review",
+        "ref": "26fe2d126bf79aafb38f43344d450b69632200f8",
+        "sha": "26fe2d126bf79aafb38f43344d450b69632200f8"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "caveman",
+      "source": {
+        "source": "git-subdir",
+        "url": "JuliusBrussee/caveman",
+        "path": "skills/caveman",
+        "ref": "v1.9.1",
+        "sha": "033f918602bd5319931256a537c4bd9ea7a48c25"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 # Draigara OpenAPM Community Architecture
 
-This repository is an APM marketplace and package catalogue, not an application or APM implementation. `apm.yml` is the hand-authored source of truth. APM generates `.claude-plugin/marketplace.json` for APM, Claude, and Copilot consumers and `.agents/plugins/marketplace.json` for Codex.
+This repository is an APM marketplace and package catalogue, not an application or APM implementation. apm.yml is the reviewed authoring source. APM generates .claude-plugin/marketplace.json for APM, Claude, and Copilot consumers and .agents/plugins/marketplace.json for Codex.
 
-The production catalogue initially contains only `draigara-forge`. Packages remain independently versioned Git releases. Marketplace entries point to immutable released versions, and generated artifacts are committed and compared in CI.
+The preview catalogue contains the global Forge and Superpowers plugins plus reviewed standalone Frontend Design, Security Review, and Caveman skills. Whole upstream plugins remain whole plugins. Forge setup installs draigara-forge globally and excludes it from repository recommendations.
 
-Local acceptance uses `fixtures/local-marketplace`, the sibling Forge plugin, and harmless direct/transitive fixture packages. The release pipeline rejects all fixture names, development versions, and filesystem sources.
+Released entries resolve to immutable upstream commits. When an upstream has no advertised tag, APM 0.26 requires an advertised branch ref during generation. In that case a separate network gate proves the branch still equals the reviewed commit, and the generated artifact is audited for that commit before publication.
 
-Git history, reviewed tags, and release artifacts are canonical. APM owns validation, resolution, policy, trust, compilation, and target deployment.
+Local acceptance uses a generated disposable marketplace made only from tracked fixture and plugin inputs. The synthetic acme-apm repository tests organisation-owned marketplace registration and adoption. Machine paths and checkout metadata never ship.
+
+Git history, reviewed tags, generated artifacts, and provenance records are canonical. APM owns validation, resolution, policy, trust, compilation, and target deployment.

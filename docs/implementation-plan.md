@@ -1,39 +1,35 @@
 # Draigara OpenAPM Community Implementation Plan
 
-**Status:** Approved implementation plan
+**Status:** Approved preview plan
 
-## Milestone 0: Identity and official scaffold
+## Milestone 0: Catalogue and provenance
 
-- Keep stable ID `draigara-openapm` and display name “Draigara OpenAPM Community” consistent everywhere.
-- Validate the `apm.yml` marketplace block with APM 0.26.x.
-- Generate Claude/Copilot and Codex marketplace artifacts; never hand-edit them.
+- Keep stable ID draigara-openapm and display name Draigara OpenAPM Community.
+- Publish Forge, Superpowers, Frontend Design, Security Review, and Caveman with factual scope/target tags.
+- Record source, licence, reviewed release or commit, package shape, and limitations for every entry.
 
-Exit: no active text uses the superseded marketplace identity, legacy marketplace formats, or placeholder schemas.
+Exit: APM 0.26 accepts every entry and active documentation matches the preview catalogue.
 
-## Milestone 1: Local vertical slice
+## Milestone 1: Reproducible generation
 
-- Validate the local catalogue, sibling `draigara-forge-plugin`, and direct/transitive composition fixtures.
-- Install into a scratch root and verify both fixture skills plus Forge MCP configuration are planned for explicit targets.
-- Add a release scan rejecting local paths, fixture packages, development versions, and secrets.
+- Verify upstream advertised refs against reviewed commits before generation.
+- Verify every advertised tag or exact commit with the upstream-pin gate, then run APM pack for Claude/Copilot and Codex. APM 0.26 `marketplace check` cannot confirm unadvertised commit SHAs, so it is not a release gate for this catalogue.
+- Commit generated artifacts and fail CI on drift, local paths, fixtures, secrets, or unexpected commits.
 
-Exit: local marketplace add, browse, install, update, remove, and repeated no-change flows are automated without network access.
+Exit: both generated marketplaces resolve only reviewed upstream content.
 
-## Milestone 2: Forge plugin publication
+## Milestone 2: End-to-end onboarding
 
-- Require a tagged, immutable `draigara-forge-plugin` release that passes its MCP and stable-target gates.
-- Update `draigara-forge` to that exact version and regenerate marketplace outputs.
-- Contract-test installation through the Forge CLI and direct APM usage.
+- Publish an immutable draigara-forge-plugin preview tag and update its catalogue entry.
+- Test direct APM install and Forge setup from a clean scratch home.
+- Test organisation marketplace adoption and safe unlinking with Draigara/acme-apm.
+- Exercise repository init, candidate selection, confirmed apply, status, and removal.
 
-Exit: `draigara-forge@draigara-openapm` resolves from a clean machine and starts `forge mcp` only after explicit executable trust.
+Exit: the CLI -> APM -> marketplace -> plugin -> MCP workflow succeeds and repeated setup converges.
 
-## Milestone 3: Marketplace release
+## Milestone 3: Preview release
 
-- Run marketplace check, pack, strict audit, provenance/licence review, and generated-output drift checks.
-- Publish immutable Git tags and checksums.
-- Exercise local-to-production source substitution and prove no filesystem locator ships.
+- Run validators, upstream-pin checks, APM pack, licence review, generated-output drift checks, and security workflows.
+- Publish immutable Git tags, checksums, attestations, and release notes.
 
-Stable release remains blocked until production Git locations exist, the Forge plugin is tagged, and required structured APM operations are integration-tested.
-
-## Later catalogue milestones
-
-Implement Engineering Foundations and other packages only after their existing charters, provenance, security, composition, and harness gates pass. Test fixtures never graduate implicitly into catalogue entries.
+Stable promotion requires native integration evidence for Claude Code, Codex, and GitHub Copilot CLI. Additional catalogue entries follow the same provenance and compatibility gates.

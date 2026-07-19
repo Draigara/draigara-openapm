@@ -12,4 +12,5 @@ Accepted ADRs are binding constraints for implementation. Proposed ADRs require 
 - [ADR-0008: Apply stronger review to executable and connected assets](./0008-security-tiering.md) — **Accepted**
 - [ADR-0009: Require charters before initial packages](./0009-package-charters.md) — **Accepted**
 - [ADR-0010: Keep public packages company-neutral](./0010-company-neutral.md) — **Accepted**
-- [ADR-0011: Bootstrap with Forge and generated marketplace outputs](./0011-bootstrap-forge-with-generated-marketplaces.md) — **Accepted**
+- [ADR-0011: Bootstrap with Forge and generated marketplace outputs](./0011-bootstrap-forge-with-generated-marketplaces.md) — **Superseded by ADR-0012**
+- [ADR-0012: Publish an upstream-first preview catalogue](./0012-upstream-first-preview-catalogue.md) — **Accepted**

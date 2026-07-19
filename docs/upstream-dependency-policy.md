@@ -48,7 +48,8 @@ A collection described as “awesome” is a discovery source, not a quality gua
 
 - Stable packages pin a released upstream version.
 - Commit pins require a documented reason.
-- Floating branches and `latest` are prohibited in released package manifests.
+- Floating branches and `latest` are prohibited in released generated marketplaces.
+- Untagged upstreams use exact commit refs in the authoring manifest. Because APM 0.26 `marketplace check` cannot confirm unadvertised commit SHAs, a separate gate proves the recorded upstream branch names the reviewed commit before APM packs the exact SHA. Generated marketplaces and CI drift checks must preserve that SHA.
 - Automated update PRs must show upstream changelog, licence delta, payload delta, and behaviour test results.
 
 ## Forks

@@ -24,8 +24,9 @@ jobs:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v7
       - shell: pwsh
-        run: ./tools/Validate-Repository.ps1
-      - run: uvx --from apm-cli==0.26.0 apm marketplace check
+        run: |
+          ./tools/Validate-Repository.ps1
+          ./tools/Test-UpstreamPins.ps1
       - run: uvx --from apm-cli==0.26.0 apm pack --marketplace=claude,codex --json
       - run: git diff --exit-code -- .claude-plugin/marketplace.json .agents/plugins/marketplace.json
       - name: Package generated marketplaces

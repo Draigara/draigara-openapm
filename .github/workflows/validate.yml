@@ -23,7 +23,15 @@ jobs:
       - name: Validate active documentation and release sources
         shell: pwsh
         working-directory: draigara-openapm
-        run: ./tools/Validate-Repository.ps1
+        run: |
+          ./tools/Validate-Repository.ps1
+          ./tools/Test-UpstreamPins.ps1
+      - name: Build production marketplace
+        working-directory: draigara-openapm
+        run: uvx --from apm-cli==0.26.0 apm pack --marketplace=claude,codex --json
+      - name: Reject generated marketplace drift
+        working-directory: draigara-openapm
+        run: git diff --exit-code -- .claude-plugin/marketplace.json .agents/plugins/marketplace.json
       - name: Build and validate local marketplace
         shell: pwsh
         working-directory: draigara-openapm

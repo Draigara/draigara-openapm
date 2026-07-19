@@ -11,7 +11,7 @@ marketplace:
     - name: draigara-forge
       description: Local sibling Forge plugin under development.
       source: ./packages/draigara-forge
-      version: 0.1.0
+      version: 0.1.0-preview.0
       category: Productivity
     - name: fixture-composition-smoke
       description: Local-only direct and transitive composition fixture.

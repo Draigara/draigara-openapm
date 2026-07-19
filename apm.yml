@@ -1,5 +1,5 @@
 name: draigara-openapm
-version: 0.1.0
+version: 0.1.0-preview.0
 description: Draigara OpenAPM Community marketplace for curated engineering agent packages.
 license: MIT
 repository: https://github.com/draigara/draigara-openapm
@@ -17,5 +17,63 @@ marketplace:
     - name: draigara-forge
       description: Repository-aware discovery and selection of APM marketplace packages through Draigara Forge.
       source: draigara-forge-plugin
-      version: "0.1.0"
+      version: "0.1.0-preview.0"
+      include_prerelease: true
       category: Productivity
+      tags:
+        - kind-plugin
+        - scope-global
+        - target-claude
+        - target-codex
+        - target-copilot
+        - forge-bootstrap
+    - name: superpowers
+      description: A complete software-development workflow plugin with planning, TDD, debugging, review, and verification skills.
+      source: github.com/obra/superpowers
+      version: "6.1.1"
+      category: Productivity
+      tags:
+        - kind-plugin
+        - scope-global
+        - target-claude
+        - target-codex
+        - software-development
+    - name: frontend-design
+      description: Anthropic's standalone skill for distinctive, production-grade frontend interface design.
+      source: github.com/anthropics/skills
+      ref: fa0fa64bdc967915dc8399e803be67759e1e62b8
+      subdir: skills/frontend-design
+      category: Design
+      tags:
+        - kind-skill
+        - scope-repository
+        - target-claude
+        - target-codex
+        - target-copilot
+        - frontend
+    - name: security-review
+      description: GitHub's standalone security review skill for identifying common implementation vulnerabilities.
+      source: github.com/github/awesome-copilot
+      ref: 26fe2d126bf79aafb38f43344d450b69632200f8
+      subdir: skills/security-review
+      category: Security
+      tags:
+        - kind-skill
+        - scope-repository
+        - target-claude
+        - target-codex
+        - target-copilot
+        - security
+    - name: caveman
+      description: Output-only skill that encourages concise responses and explicitly trades a small per-turn input cost for lower output usage.
+      source: github.com/JuliusBrussee/caveman
+      version: "1.9.1"
+      subdir: skills/caveman
+      category: Productivity
+      tags:
+        - kind-skill
+        - scope-repository
+        - target-claude
+        - target-codex
+        - target-copilot
+        - token-economics

@@ -1,0 +1,109 @@
+{
+  "name": "draigara-openapm",
+  "owner": {
+    "name": "Draigara",
+    "url": "https://github.com/draigara"
+  },
+  "plugins": [
+    {
+      "name": "draigara-forge",
+      "description": "Repository-aware discovery and selection of APM marketplace packages through Draigara Forge.",
+      "version": "0.1.0-preview.0",
+      "tags": [
+        "kind-plugin",
+        "scope-global",
+        "target-claude",
+        "target-codex",
+        "target-copilot",
+        "forge-bootstrap"
+      ],
+      "category": "Productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/draigara/draigara-forge-plugin",
+        "ref": "v0.1.0-preview.0",
+        "sha": "81a2b85d961af5a5e02dbbcc6d9f20540b7697ef"
+      }
+    },
+    {
+      "name": "superpowers",
+      "description": "A complete software-development workflow plugin with planning, TDD, debugging, review, and verification skills.",
+      "version": "6.1.1",
+      "tags": [
+        "kind-plugin",
+        "scope-global",
+        "target-claude",
+        "target-codex",
+        "software-development"
+      ],
+      "category": "Productivity",
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers",
+        "ref": "v6.1.1",
+        "sha": "c984ea2e7aeffdcc865784fd6c5e3ab75da0209a"
+      }
+    },
+    {
+      "name": "frontend-design",
+      "description": "Anthropic's standalone skill for distinctive, production-grade frontend interface design.",
+      "tags": [
+        "kind-skill",
+        "scope-repository",
+        "target-claude",
+        "target-codex",
+        "target-copilot",
+        "frontend"
+      ],
+      "category": "Design",
+      "source": {
+        "source": "git-subdir",
+        "url": "anthropics/skills",
+        "path": "skills/frontend-design",
+        "ref": "fa0fa64bdc967915dc8399e803be67759e1e62b8",
+        "sha": "fa0fa64bdc967915dc8399e803be67759e1e62b8"
+      }
+    },
+    {
+      "name": "security-review",
+      "description": "GitHub's standalone security review skill for identifying common implementation vulnerabilities.",
+      "tags": [
+        "kind-skill",
+        "scope-repository",
+        "target-claude",
+        "target-codex",
+        "target-copilot",
+        "security"
+      ],
+      "category": "Security",
+      "source": {
+        "source": "git-subdir",
+        "url": "github/awesome-copilot",
+        "path": "skills/security-review",
+        "ref": "26fe2d126bf79aafb38f43344d450b69632200f8",
+        "sha": "26fe2d126bf79aafb38f43344d450b69632200f8"
+      }
+    },
+    {
+      "name": "caveman",
+      "description": "Output-only skill that encourages concise responses and explicitly trades a small per-turn input cost for lower output usage.",
+      "version": "1.9.1",
+      "tags": [
+        "kind-skill",
+        "scope-repository",
+        "target-claude",
+        "target-codex",
+        "target-copilot",
+        "token-economics"
+      ],
+      "category": "Productivity",
+      "source": {
+        "source": "git-subdir",
+        "url": "JuliusBrussee/caveman",
+        "path": "skills/caveman",
+        "ref": "v1.9.1",
+        "sha": "033f918602bd5319931256a537c4bd9ea7a48c25"
+      }
+    }
+  ]
+}

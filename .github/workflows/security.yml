@@ -32,6 +32,7 @@ jobs:
           if test -d packages; then
             ! grep -R -E '(@|ref:|version:)[[:space:]]*(latest|main|master|HEAD)' packages
           fi
+          ! grep -R -E 'version:[[:space:]]*(latest|main|master|HEAD)' apm.yml
       - name: Locate executable assets for review
         shell: bash
         run: |
