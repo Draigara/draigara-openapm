@@ -2,6 +2,27 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $errors = [System.Collections.Generic.List[string]]::new()
 
+foreach ($required in @('NOTICE', 'TRADEMARKS.md')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $root $required))) { $errors.Add("Missing legal notice: $required") }
+}
+
+foreach ($required in @(
+    'docs/package-charters/repository-documentation.md',
+    'docs/provenance/repository-documentation.md',
+    'fixtures/repository-documentation/baseline.md',
+    'fixtures/repository-documentation/expected-checks.json',
+    'packages/repository-documentation/apm.yml',
+    'packages/repository-documentation/LICENSE',
+    'packages/repository-documentation/NOTICE',
+    'packages/repository-documentation/TRADEMARKS.md',
+    'packages/repository-documentation/README.md',
+    'packages/repository-documentation/.apm/skills/repository-documentation/SKILL.md'
+)) {
+    if (-not (Test-Path -LiteralPath (Join-Path $root $required))) {
+        $errors.Add("Missing repository-documentation contract file: $required")
+    }
+}
+
 $active = @('README.md', 'AGENTS.md', 'PRODUCT-CONTEXT.md') + (Get-ChildItem (Join-Path $root 'docs') -File | ForEach-Object { "docs/$($_.Name)" })
 foreach ($relative in $active) {
     $content = Get-Content -Raw -LiteralPath (Join-Path $root $relative)
@@ -11,6 +32,13 @@ foreach ($relative in $active) {
 }
 
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $root 'apm.yml')
+$license = Get-Content -Raw -LiteralPath (Join-Path $root 'LICENSE')
+if ($manifest -notmatch '(?m)^license: Apache-2\.0$') {
+    $errors.Add('apm.yml must declare Apache-2.0')
+}
+if ($license -notmatch '^\s*Apache License\s+Version 2\.0, January 2004' -or $license -notmatch '7\. Disclaimer of Warranty\.' -or $license -notmatch '8\. Limitation of Liability\.') {
+    $errors.Add('LICENSE must contain the official Apache License 2.0 terms')
+}
 foreach ($required in @(
     'name: draigara-openapm',
     'version: 0.1.0-preview.0',
@@ -25,6 +53,8 @@ foreach ($required in @(
     'source: github.com/github/awesome-copilot',
     'name: caveman',
     'source: github.com/JuliusBrussee/caveman',
+    'name: repository-documentation',
+    'source: ./packages/repository-documentation',
     'codex: {}',
     'claude: {}'
 )) {
@@ -35,9 +65,32 @@ foreach ($commit in @('fa0fa64bdc967915dc8399e803be67759e1e62b8', '26fe2d126bf79
     if (-not $manifest.Contains("ref: $commit")) { $errors.Add("apm.yml is missing reviewed immutable ref: $commit") }
 }
 
-foreach ($name in @('draigara-forge', 'superpowers', 'frontend-design', 'security-review', 'caveman')) {
+foreach ($name in @('draigara-forge', 'superpowers', 'frontend-design', 'security-review', 'caveman', 'repository-documentation')) {
     if (-not (Test-Path -LiteralPath (Join-Path $root "docs/provenance/$name.md"))) {
         $errors.Add("Missing provenance record for $name")
+    }
+}
+
+$expectationsPath = Join-Path $root 'fixtures/repository-documentation/expected-checks.json'
+$skillPath = Join-Path $root 'packages/repository-documentation/.apm/skills/repository-documentation/SKILL.md'
+if (Test-Path -LiteralPath $expectationsPath) {
+    try { $expectations = Get-Content -Raw -LiteralPath $expectationsPath | ConvertFrom-Json }
+    catch { $errors.Add('Invalid repository-documentation expected-checks.json'); $expectations = $null }
+    if ($null -ne $expectations -and (Test-Path -LiteralPath $skillPath)) {
+        $skill = Get-Content -Raw -LiteralPath $skillPath
+        foreach ($required in @($expectations.requiredSkillSections) + @($expectations.requiredGuidance)) {
+            if (-not $skill.Contains($required)) { $errors.Add("repository-documentation skill is missing contract text: $required") }
+        }
+    }
+}
+
+$baselinePath = Join-Path $root 'fixtures/repository-documentation/baseline.md'
+if (Test-Path -LiteralPath $baselinePath) {
+    $baseline = Get-Content -Raw -LiteralPath $baselinePath
+    if ($baseline -notmatch 'C:\\Projects') { $errors.Add('Repository-documentation baseline no longer covers a machine-specific path') }
+    if ($baseline -notmatch 'works everywhere') { $errors.Add('Repository-documentation baseline no longer covers an unsupported platform claim') }
+    if ($baseline.IndexOf('## Install') -lt 0 -or $baseline.IndexOf('## Development') -gt $baseline.IndexOf('## Install')) {
+        $errors.Add('Repository-documentation baseline no longer buries installation after development setup')
     }
 }
 

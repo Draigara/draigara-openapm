@@ -76,6 +76,18 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "repository-documentation",
+      "source": {
+        "source": "local",
+        "path": "./packages/repository-documentation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Documentation"
     }
   ]
 }

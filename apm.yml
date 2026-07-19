@@ -1,7 +1,7 @@
 name: draigara-openapm
 version: 0.1.0-preview.0
 description: Draigara OpenAPM Community marketplace for curated engineering agent packages.
-license: MIT
+license: Apache-2.0
 repository: https://github.com/draigara/draigara-openapm
 marketplace:
   owner:
@@ -77,3 +77,15 @@ marketplace:
         - target-codex
         - target-copilot
         - token-economics
+    - name: repository-documentation
+      description: Guidance for clear, user-first README and CONTRIBUTING documentation.
+      source: ./packages/repository-documentation
+      version: "0.1.0"
+      category: Documentation
+      tags:
+        - kind-skill
+        - scope-repository
+        - target-claude
+        - target-codex
+        - target-copilot
+        - repository-documentation

@@ -1,0 +1,21 @@
+{
+  "requiredSkillSections": [
+    "## Document contract",
+    "## Workflow",
+    "## Verification"
+  ],
+  "requiredGuidance": [
+    "purpose",
+    "copyable",
+    "CONTRIBUTING.md",
+    "supported",
+    "license",
+    "screenshot"
+  ],
+  "baselineProblems": [
+    "machine-specific-path",
+    "unsupported-platform-claim",
+    "buried-installation",
+    "mixed-contributor-setup"
+  ]
+}

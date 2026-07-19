@@ -104,6 +104,21 @@
         "ref": "v1.9.1",
         "sha": "033f918602bd5319931256a537c4bd9ea7a48c25"
       }
+    },
+    {
+      "name": "repository-documentation",
+      "description": "Guidance for clear, user-first README and CONTRIBUTING documentation.",
+      "version": "0.1.0",
+      "tags": [
+        "kind-skill",
+        "scope-repository",
+        "target-claude",
+        "target-codex",
+        "target-copilot",
+        "repository-documentation"
+      ],
+      "category": "Documentation",
+      "source": "./packages/repository-documentation"
     }
   ]
 }

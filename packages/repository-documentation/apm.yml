@@ -1,0 +1,9 @@
+name: repository-documentation
+version: 0.1.0
+description: Guidance for clear, user-first README and CONTRIBUTING documentation.
+license: Apache-2.0
+repository: https://github.com/Draigara/draigara-openapm
+dependencies:
+  apm: []
+  mcp: []
+includes: auto

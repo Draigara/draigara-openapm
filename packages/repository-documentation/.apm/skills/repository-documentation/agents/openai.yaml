@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repository Documentation"
+  short_description: "Write clear, user-first repository documentation"
+  default_prompt: "Use $repository-documentation to create or improve repository-facing documentation."
