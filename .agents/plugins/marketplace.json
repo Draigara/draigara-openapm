@@ -9,8 +9,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/draigara/draigara-forge-plugin",
-        "ref": "v0.1.0-preview.0",
-        "sha": "81a2b85d961af5a5e02dbbcc6d9f20540b7697ef"
+        "ref": "v0.1.0-preview.1",
+        "sha": "8ba52fa611640f783a416724eb006c675e4d9d40"
       },
       "policy": {
         "installation": "AVAILABLE",
