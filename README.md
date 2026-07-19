@@ -1,19 +1,69 @@
 # Draigara OpenAPM Community
 
-This repository publishes the public APM-native marketplace with stable ID `draigara-openapm`. It uses Microsoft APM's official package, marketplace, dependency, validation, and generated-output formats; it contains no Forge-specific resolver or package model.
-
-The first production entry is `draigara-forge@draigara-openapm`, sourced from the independently released `draigara-forge-plugin` repository. Forge recommends top-level entries; APM owns their complete dependency resolution and deployment.
-
-## Local development
-
-Register this repository or `fixtures/local-marketplace` as a local APM marketplace. The local catalogue points to the sibling Forge plugin and harmless composition fixtures. Local paths and fixture packages are prohibited from production outputs.
-
-Production authoring follows:
+Draigara OpenAPM Community is a public, curated Microsoft APM marketplace. Its
+stable marketplace ID is:
 
 ```text
-apm marketplace check
-apm pack --marketplace=claude,codex
-apm marketplace audit draigara-openapm --strict
+draigara-openapm
 ```
 
-Package charters describe future catalogue candidates, not published packages. Read `AGENTS.md`, `docs/architecture.md`, and `docs/implementation-plan.md` before implementation.
+APM owns package discovery, dependency resolution, validation, and deployment.
+This repository publishes marketplace metadata and policy; it does not
+implement a second package manager or resolver.
+
+## Available packages
+
+The initial package is Draigara Forge:
+
+```text
+draigara-forge@draigara-openapm
+└─ package       └─ marketplace
+```
+
+Forge provides guided repository evaluation and package selection. Additional
+package charters in this repository describe candidates, not packages currently
+available to install.
+
+## Get started
+
+The recommended path registers the marketplace and installs Forge through one
+guided setup:
+
+```sh
+npx @draigara/forge setup
+```
+
+Forge displays the complete plan before asking APM to change marketplace or
+plugin state.
+
+## Contributing packages
+
+Community packages must follow the curation, licensing, provenance, security,
+and testing requirements in [docs/package-authoring.md](./docs/package-authoring.md)
+and [docs/curation-policy.md](./docs/curation-policy.md). Start with an issue or
+proposal before adding a production marketplace entry.
+
+To create a private local marketplace containing a sibling
+`draigara-forge-plugin` checkout and the harmless composition fixtures, run:
+
+```powershell
+$marketplace = ./tools/New-LocalMarketplace.ps1
+Push-Location $marketplace
+uvx --from apm-cli apm marketplace check --offline
+uvx --from apm-cli apm pack --marketplace claude,codex
+Pop-Location
+```
+
+The generator accepts an optional output directory. Local paths and fixture
+packages are prohibited from production marketplace output.
+
+Marketplace maintainers validate production metadata with:
+
+```sh
+uvx --from apm-cli apm marketplace check
+uvx --from apm-cli apm pack --marketplace claude,codex
+```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) and
+[docs/architecture.md](./docs/architecture.md) for repository guidance. Coding
+agents must start with [AGENTS.md](./AGENTS.md) and the Accepted ADRs.
